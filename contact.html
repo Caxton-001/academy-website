@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Coire Live - Get in touch for event inquiries, ticket information, artist bookings, or partnership opportunities. We're here to help with all your live entertainment needs.">
+    <title>Contact Us - Dev Spark Academy</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon-32x32.webp" sizes="32x32">
+    <link rel="apple-touch-icon" href="images/favicon-192x192.webp">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #ef6f50;
+            --secondary-color: #ef6f50;  /* Changed from #2c3e50 to match main site */
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+            --primary-hover: #e05a3a;
+            --accent-color: #e67e22;
+            --text-light: #7f8c8d;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-section {
+            padding: 120px 0 100px;
+            background: linear-gradient(135deg, #fff9f2 0%, #f5e6d9 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,10 L50,30 L70,10 L90,30 L70,50 L90,70 L70,90 L50,70 L30,90 L10,70 L30,50 L10,30z" fill="rgba(239, 111, 80, 0.05)" /></svg>');
+            opacity: 0.6;
+            z-index: 0;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+        
+        .contact-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .contact-header h1 {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .contact-header h1::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .contact-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 20px auto 0;
+            line-height: 1.7;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, rgba(239, 111, 80, 0.9), rgba(248, 161, 69, 0.9));
+            padding: 60px 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-info::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -30px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-info p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-details {
+            margin-top: 40px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 20px;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        
+        .contact-item:hover .contact-icon {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .contact-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .contact-text a, .contact-text span {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+        }
+        
+        .contact-text a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .social-media {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .contact-form {
+            padding: 60px 40px;
+            background: var(--white);
+        }
+        
+        .form-header {
+            margin-bottom: 40px;
+        }
+        
+        .form-header h2 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .form-header p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        .floating-form {
+            display: grid;
+            gap: 25px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .form-group-half {
+            margin-bottom: 0;
+        }
+        
+        .form-label {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            color: var(--text-light);
+            transition: var(--transition);
+            pointer-events: none;
+            font-size: 1rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 0 8px;
+            font-size: 1rem;
+            border: none;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+            background: transparent;
+            transition: var(--transition);
+            color: var(--text-color);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-input:focus ~ .form-label,
+        .form-input:not(:placeholder-shown) ~ .form-label {
+            top: -15px;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+        }
+        
+        textarea.form-input {
+            min-height: 100px;
+            resize: vertical;
+            padding-top: 15px;
+        }
+        
+        .form-actions {
+            margin-top: 20px;
+        }
+        
+        .btn-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-submit:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-submit i {
+            margin-left: 8px;
+            transition: var(--transition);
+        }
+        
+        .btn-submit:hover i {
+            transform: translateX(5px);
+        }
+        
+        .btn-text {
+            display: inline-block;
+            transition: var(--transition);
+        }
+        
+        .btn-sending .btn-text {
+            transform: translateY(-30px);
+            opacity: 0;
+        }
+        
+        .btn-sending i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: spin 1s linear infinite;
+        }
+        
+        .btn-success {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 30px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .btn-submit.success .btn-text {
+            transform: translateY(-30px);
+            opacity: 0;
+        }
+        
+        .btn-submit.success .btn-success {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+        
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .form-messages {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .form-messages.success {
+            background-color: rgba(239, 111, 80, 0.1);
+            color: #b34a2e;
+            border: 1px solid rgba(239, 111, 80, 0.2);
+            display: block;
+        }
+        
+        .form-messages.error {
+            background-color: rgba(248, 215, 218, 0.7);
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        .form-group.error .form-input {
+            border-color: #dc3545;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-group.error .error-message {
+            display: block;
+        }
+        
+        @media (max-width: 992px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                padding: 40px 30px;
+            }
+            
+            .contact-form {
+                padding: 40px 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .form-group {
+                margin-bottom: 25px;
+            }
+            
+            .contact-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-header p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-section {
+                padding: 80px 0 60px;
+            }
+            
+            .contact-header {
+                margin-bottom: 40px;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="site-logo">
+                <a href="index.html">
+                    <img src="images/UG-CodeWeek-logo.webp" alt="Coire Live" width="300" height="43">
+                </a>
+            </div>
+            
+            <nav class="main-navigation">
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="menu-icon"></span>
+                </button>
+                
+                <ul class="menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li class="menu-highlight"><a href="https://me.codejika.org/" target="_blank">START CODING</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-header">
+                <h1>Contact Us</h1>
+                <p>Get in touch with us for any questions or inquiries. We're here to help!</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Let's Get In Touch</h2>
+                    <p>We'd love to hear from you! Whether you have questions about our sessions, want to collaborate, or just want to say hello, feel free to reach out to us.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Our Location</h3>
+                                <span>Rwenzori courts, Kampala- Uganda</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Phone Number</h3>
+                                <a href="tel:+15551234567">+256 771 85 9009 </a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Email Address</h3>
+                                <a href="mailto:info@devsparkacademy.com">info@devsparkacademy.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Working Hours</h3>
+                                <span>Saturday: 10:00 AM - 5:00 PM</span>
+                                <span>Sunday: 2:00pm - 5:00pm</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-media">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <div class="form-header">
+                        <h2>Get In Touch</h2>
+                        <p>Have questions or want to get involved? We'd love to hear from you! Fill out the form below and our team will get back to you within 24-48 hours.</p>
+                    </div>
+                    
+                    <form id="contact-form" onsubmit="return validateForm(this)" class="floating-form">
+                        <div id="form-messages" class="form-messages"></div>
+                        
+                        <div class="form-row">
+                            <div class="form-group form-group-half">
+                                <input type="text" id="first-name" class="form-input" placeholder=" " required>
+                                <label for="first-name" class="form-label">First Name</label>
+                                <div class="error-message">Please enter your first name</div>
+                            </div>
+                            
+                            <div class="form-group form-group-half">
+                                <input type="text" id="last-name" class="form-input" placeholder=" " required>
+                                <label for="last-name" class="form-label">Last Name</label>
+                                <div class="error-message">Please enter your last name</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" class="form-input" placeholder=" " required>
+                            <label for="email" class="form-label">Email Address</label>
+                            <div class="error-message">Please enter a valid email address</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="phone" class="form-input" placeholder=" ">
+                            <label for="phone" class="form-label">Phone Number (Optional)</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="subject" class="form-input" style="padding-top: 12px;" required>
+                                <option value="" disabled selected></option>
+                                <option value="general">General Inquiry</option>
+                                <option value="event">Event Information</option>
+                                <option value="booking">Artist Booking</option>
+                                <option value="partnership">Partnership Opportunities</option>
+                                <option value="press">Press Inquiries</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <label for="subject" class="form-label">Subject</label>
+                            <div class="error-message">Please select a subject</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="message" class="form-input" placeholder=" " required></textarea>
+                            <label for="message" class="form-label">Your Message</label>
+                            <div class="error-message">Please enter your message</div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-submit">
+                                <span class="btn-text">Send Message</span>
+                                <i class="fas fa-paper-plane"></i>
+                                <span class="btn-success">
+                                    <i class="fas fa-check"></i> Message Sent!
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-widget">
+                    <h3>Dev Spark Academy</h3>
+                    <p>Preparing the next generation of problem solvers keen at using technology solutions.</p>
+                </div>
+                <div class="footer-widget">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-widget">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Dev Spark Academy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Form validation and submission
+        function validateForm(form) {
+            // Reset previous error states
+            const formGroups = form.querySelectorAll('.form-group');
+            formGroups.forEach(group => group.classList.remove('error'));
+            
+            let isValid = true;
+            
+            // Validate required fields
+            const requiredFields = form.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    const formGroup = field.closest('.form-group');
+                    formGroup.classList.add('error');
+                    isValid = false;
+                }
+            });
+            
+            // Validate email format
+            const emailField = form.querySelector('input[type="email"]');
+            if (emailField && emailField.value.trim()) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailField.value.trim())) {
+                    const formGroup = emailField.closest('.form-group');
+                    formGroup.classList.add('error');
+                    formGroup.querySelector('.error-message').textContent = 'Please enter a valid email address';
+                    isValid = false;
+                }
+            }
+            
+            if (!isValid) {
+                form.querySelector('.form-messages').textContent = 'Please fill in all required fields correctly.';
+                form.querySelector('.form-messages').className = 'form-messages error';
+                return false;
+            }
+            
+            // If validation passes, simulate form submission
+            simulateFormSubmission(form);
+            return false; // Prevent actual form submission for this example
+        }
+        
+        function simulateFormSubmission(form) {
+            const submitBtn = form.querySelector('.btn-submit');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const formMessages = form.querySelector('.form-messages');
+            
+            // Show loading state
+            submitBtn.classList.add('btn-sending');
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Show success state
+                submitBtn.classList.remove('btn-sending');
+                submitBtn.classList.add('success');
+                
+                // Show success message
+                formMessages.textContent = 'Your message has been sent successfully! We\'ll get back to you soon.';
+                formMessages.className = 'form-messages success';
+                
+                // Reset form
+                setTimeout(() => {
+                    form.reset();
+                    submitBtn.classList.remove('success');
+                    btnText.style.opacity = '1';
+                    btnText.style.transform = 'translateY(0)';
+                }, 2000);
+                
+                // Scroll to top of form
+                form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+            }, 1500);
+        }
+        
+        // Add input validation on blur
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contact-form');
+            if (form) {
+                const inputs = form.querySelectorAll('.form-input, select');
+                
+                inputs.forEach(input => {
+                    input.addEventListener('blur', function() {
+                        const formGroup = this.closest('.form-group');
+                        if (!formGroup) return;
+                        
+                        // Reset error state
+                        formGroup.classList.remove('error');
+                        
+                        // Check if field is required and empty
+                        if (this.hasAttribute('required') && !this.value.trim()) {
+                            formGroup.classList.add('error');
+                            return;
+                        }
+                        
+                        // Validate email format
+                        if (this.type === 'email' && this.value.trim()) {
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!emailRegex.test(this.value.trim())) {
+                                formGroup.classList.add('error');
+                                formGroup.querySelector('.error-message').textContent = 'Please enter a valid email address';
+                            }
+                        }
+                    });
+                });
+                
+                // Add animation to form elements
+                const formElements = form.querySelectorAll('.form-group, .form-actions');
+                formElements.forEach((el, index) => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+                    
+                    // Trigger reflow
+                    void el.offsetWidth;
+                    
+                    // Apply animation
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

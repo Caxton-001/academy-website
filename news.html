@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Latest news and updates from Coire Live - Stay informed about upcoming events, artist announcements, and exclusive behind-the-scenes content.">
+    <title>News & Updates - Coire Live</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon-32x32.webp" sizes="32x32">
+    <link rel="apple-touch-icon" href="images/favicon-192x192.webp">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        .news-header {
+            background: var(--gradient-orange), url('images/news-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0 60px;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .news-header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,10 L50,30 L70,10 L90,30 L70,50 L90,70 L70,90 L50,70 L30,90 L10,70 L30,50 L10,30z" fill="rgba(255, 255, 255, 0.05)" /></svg>');
+            opacity: 0.6;
+            z-index: 0;
+        }
+        
+        .news-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .news-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .news-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .news-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            padding: 10px 25px;
+            background: #fff;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #555;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .filter-btn:hover {
+            background: var(--light-bg);
+            border-color: var(--light-bg);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.15);
+            border-color: rgba(255, 107, 53, 0.2);
+        }
+        
+        .news-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .news-card:hover .news-image img {
+            transform: scale(1.1);
+        }
+        
+        .news-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .news-card:hover .news-category {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .news-content {
+            padding: 25px;
+        }
+        
+        .news-date {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .news-date i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        .news-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .news-content p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+        }
+        
+        .news-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+        
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .read-more {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: var(--primary-hover);
+        }
+        
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        .featured-news {
+            margin-bottom: 80px;
+        }
+        
+        .featured-news .news-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .featured-news .news-image {
+            height: 100%;
+        }
+        
+        .newsletter-section {
+            background: linear-gradient(135deg, rgba(239, 111, 80, 0.9), rgba(248, 161, 69, 0.9));
+            padding: 60px 0;
+            color: white;
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .newsletter-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-section p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .newsletter-form button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background: var(--primary-hover);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 60px;
+        }
+        
+        .page-link {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: white;
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #eee;
+        }
+        
+        .page-link:hover, .page-link.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .page-link.prev, .page-link.next {
+            width: auto;
+            padding: 0 20px;
+            border-radius: 50px;
+        }
+        
+        @media (max-width: 1200px) {
+            .featured-news .news-card {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-news .news-image {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .news-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .news-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .news-header {
+                padding: 80px 0 40px;
+                margin-top: 70px;
+            }
+            
+            .news-header h1 {
+                font-size: 2rem;
+            }
+            
+            .news-header p {
+                font-size: 1rem;
+            }
+            
+            .news-filters {
+                flex-wrap: wrap;
+            }
+            
+            .newsletter-section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            .newsletter-form input {
+                border-radius: 10px 10px 0 0;
+                text-align: center;
+            }
+            
+            .newsletter-form button {
+                border-radius: 0 0 10px 10px;
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .news-container {
+                padding: 40px 15px;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pagination {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="site-logo">
+                <a href="index.html">
+                    <img src="images/UG-CodeWeek-logo.webp" alt="Coire Live" width="300" height="43">
+                </a>
+            </div>
+            
+            <nav class="main-navigation">
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="menu-icon"></span>
+                </button>
+                
+                <ul class="menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="news.html" class="active">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="menu-highlight"><a href="https://me.codejika.org/" target="_blank">START CODING</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- News Header -->
+    <section class="news-header">
+        <div class="container">
+            <h1>Latest News & Updates</h1>
+            <p>Stay informed about upcoming events, artist announcements, and exclusive behind-the-scenes content from Coire Live.</p>
+        </div>
+    </section>
+
+    <!-- News Content -->
+    <div class="news-container">
+        <!-- Featured News -->
+        <div class="featured-news">
+            <div class="section-title">
+                <h2>Featured Story</h2>
+                <p>Don't miss out on our latest and most exciting updates</p>
+            </div>
+            
+            <div class="news-card" data-category="featured">
+                <div class="news-image">
+                    <span class="news-category">Featured</span>
+                    <img src="images/featured-news.jpg" alt="Featured News">
+                </div>
+                <div class="news-content">
+                    <div class="news-date"><i class="far fa-calendar-alt"></i> June 25, 2023</div>
+                    <h3>Coire Live Announces Biggest Summer Concert Series Yet</h3>
+                    <p>We're thrilled to announce our most ambitious summer concert series to date, featuring over 50 artists across multiple genres. From rock and pop to electronic and hip-hop, there's something for every music lover this summer.</p>
+                    <div class="news-meta">
+                        <div class="news-author">
+                            <div class="author-avatar">
+                                <img src="images/author-1.jpg" alt="Author">
+                            </div>
+                            <span>By Sarah Johnson</span>
+                        </div>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- News Filters -->
+        <div class="news-filters">
+            <button class="filter-btn active" data-filter="all">All News</button>
+            <button class="filter-btn" data-filter="concerts">Concerts</button>
+            <button class="filter-btn" data-filter="festivals">Festivals</button>
+            <button class="filter-btn" data-filter="announcements">Announcements</button>
+            <button class="filter-btn" data-filter="behind-scenes">Behind the Scenes</button>
+        </div>
+        
+        <!-- News Grid -->
+        <div class="news-grid">
+            <!-- News Item 1 -->
+            <div class="news-card" data-category="concerts">
+                <div class="news-image">
+                    <span class="news-category">Concert</span>
+                    <img src="images/news-1.jpg" alt="Concert Announcement">
+                </div>
+                <div class="news-content">
+                    <div class="news-date"><i class="far fa-calendar-alt"></i> June 20, 2023</div>
+                    <h3>International Superstar Joins Coire Live Festival Lineup</h3>
+                    <p>We're excited to announce that global music sensation has been added to our festival lineup. Don't miss this exclusive performance!</p>
+                    <div class="news-meta">
+                        <div class="news-author">
+                            <div class="author-avatar">
+                                <img src="images/author-2.jpg" alt="Author">
+                            </div>
+                            <span>By Michael Chen</span>
+                        </div>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- News Item 2 -->
+            <div class="news-card" data-category="festivals">
+                <div class="news-image">
+                    <span class="news-category">Festival</span>
+                    <img src="images/news-2.jpg" alt="Festival News">
+                </div>
+                <div class="news-content">
+                    <div class="news-date"><i class="far fa-calendar-alt"></i> June 15, 2023</div>
+                    <h3>Early Bird Tickets for Summer Festival Now on Sale</h3>
+                    <p>Secure your spot at this year's most anticipated music festival with our limited-time early bird tickets. Prices go up soon!</p>
+                    <div class="news-meta">
+                        <div class="news-author">
+                            <div class="author-avatar">
+                                <img src="images/author-3.jpg" alt="Author">
+                            </div>
+                            <span>By David Wilson</span>
+                        </div>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- News Item 3 -->
+            <div class="news-card" data-category="announcements">
+                <div class="news-image">
+                    <span class="news-category">Announcement</span>
+                    <img src="images/news-3.jpg" alt="Announcement">
+                </div>
+                <div class="news-content">
+                    <div class="news-date"><i class="far fa-calendar-alt"></i> June 10, 2023</div>
+                    <h3>Coire Live Partners with Local Charities for 2023 Season</h3>
+                    <p>We're proud to announce our partnership with several local charities to give back to the community through the power of music.</p>
+                    <div class="news-meta">
+                        <div class="news-author">
+                            <div class="author-avatar">
+                                <img src="images/author-1.jpg" alt="Author">
+                            </div>
+                            <span>By Sarah Johnson</span>
+                        </div>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- News Item 4 -->
+            <div class="news-card" data-category="behind-scenes">
+                <div class="news-image">
+                    <span class="news-category">Behind the Scenes</span>
+                    <img src="images/news-4.jpg" alt="Behind the Scenes">
+                </div>
+                <div class="news-content">
+                    <div class="news-date"><i class="far fa-calendar-alt"></i> June 5, 2023</div>
+                    <h3>Exclusive: A Day in the Life of Our Stage Crew</h3>
+                    <p>Ever wondered what goes into setting up a major concert? We take you behind the scenes with our incredible stage crew.</p>
+                    <div class="news-meta">
+                        <div class="news-author">
+                            <div class="author-avatar">
+                                <img src="images/author-4.jpg" alt="Author">
+                            </div>
+                            <span>By Emily Davis</span>
+                        </div>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- News Item 5 -->
+            <div class="news-card" data-category="concerts">
+                <div class="news-image">
+                    <span class="news-category">Concert</span>
+                    <img src="images/news-5.jpg" alt="Concert News">
+                </div>
+                <div class="news-content">
+                    <div class="news-date"><i class="far fa-calendar-alt"></i> May 28, 2023</div>
+                    <h3>Rock Legends to Headline Coire Live's Anniversary Show</h3>
+                    <p>We're celebrating our 10th anniversary with a special concert featuring some of the biggest names in rock music. Get ready for an unforgettable night!</p>
+                    <div class="news-meta">
+                        <div class="news-author">
+                            <div class="author-avatar">
+                                <img src="images/author-2.jpg" alt="Author">
+                            </div>
+                            <span>By Michael Chen</span>
+                        </div>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- News Item 6 -->
+            <div class="news-card" data-category="announcements">
+                <div class="news-image">
+                    <span class="news-category">Announcement</span>
+                    <img src="images/news-6.jpg" alt="Announcement">
+                </div>
+                <div class="news-content">
+                    <div class="news-date"><i class="far fa-calendar-alt"></i> May 20, 2023</div>
+                    <h3>Coire Live Wins "Best Live Event Organizer" Award</h3>
+                    <p>We're honored to receive the prestigious award for Best Live Event Organizer at this year's Entertainment Excellence Awards.</p>
+                    <div class="news-meta">
+                        <div class="news-author">
+                            <div class="author-avatar">
+                                <img src="images/author-3.jpg" alt="Author">
+                            </div>
+                            <span>By David Wilson</span>
+                        </div>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination">
+            <a href="#" class="page-link prev"><i class="fas fa-chevron-left"></i> Previous</a>
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link next">Next <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </div>
+    
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter and never miss an update on upcoming events, exclusive offers, and behind-the-scenes content.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-widget">
+                    <h3>Coire Live</h3>
+                    <p>Creating unforgettable live event experiences that bring people together.</p>
+                </div>
+                <div class="footer-widget">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-widget">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Coire Live. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <script>
+        // News filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const newsCards = document.querySelectorAll('.news-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Show/hide news cards based on filter
+                    newsCards.forEach((card, index) => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter || (filter === 'announcements' && card.getAttribute('data-category') === 'featured')) {
+                            card.style.display = 'block';
+                            // Reapply animation with delay for staggered effect
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                                card.style.transition = `opacity 0.3s ease ${index * 0.05}s, transform 0.3s ease ${index * 0.05}s`;
+                            }, 10);
+                        } else {
+                            // Hide immediately without animation
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            card.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+                            // Hide after animation completes
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 200);
+                        }
+                    });
+                });
+            });
+            
+            // Add animation on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.news-card');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 50) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // Set initial state for animation
+            function initializeAnimations() {
+                document.querySelectorAll('.news-card:not([style*="display: none"])').forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+                    
+                    // Trigger reflow to ensure styles are applied
+                    void card.offsetWidth;
+                    
+                    // Make visible with animation
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
+            }
+            
+            // Initialize animations on load
+            window.addEventListener('load', () => {
+                initializeAnimations();
+                animateOnScroll();
+            });
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>
